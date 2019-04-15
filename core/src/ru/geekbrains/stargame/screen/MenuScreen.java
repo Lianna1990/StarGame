@@ -1,54 +1,53 @@
 package ru.geekbrains.stargame.screen;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import ru.geekbrains.stargame.BaseScreen;
+import ru.geekbrains.stargame.base.BaseScreen;
+import ru.geekbrains.stargame.math.Rect;
+import ru.geekbrains.stargame.sprite.Background;
 
-import static java.lang.Character.SIZE;
+
+
+
 
 public class MenuScreen extends BaseScreen {
-    private Vector2 touch;
-    private Vector2 pos;
-    private Vector2 v;
-    private Texture img;
+
+    private Texture bg;
+    private Background  background;
 
     @Override
     public void show() {
         super.show();
-        touch = new Vector2();
-        pos = new Vector2();
-        v = new Vector2(0.2f,0.5f);
-        img = new Texture("badlogic.jpg");
+        bg = new Texture("gotham.jpg");   //("bg.png");
+        background = new Background(new TextureRegion(bg));
+    }
+
+    @Override
+    public void resize(Rect worldBounds) {
+        super.resize(worldBounds);
+        background.resize(worldBounds);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        pos.add(v);
         batch.begin();
-        batch.draw(img, pos.x, pos.y);
+        background.draw(batch);
         batch.end();
-        if (pos.y > Gdx.graphics.getHeight() - 256) {
-            v.setZero();
-        }
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        img.dispose();
+        bg.dispose();
     }
 
     @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        touch.set(screenX, Gdx.graphics.getHeight() - screenY);
-        System.out.println("touchDown touch.x = " + touch.x + " touch.y = " + touch.y);
+    public boolean touchDown(Vector2 touch, int pointer) {
         return false;
     }
-
-
 }
 
