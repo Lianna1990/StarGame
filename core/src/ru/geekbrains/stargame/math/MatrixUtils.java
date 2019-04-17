@@ -4,6 +4,11 @@ package ru.geekbrains.stargame.math;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 
+
+
+/**
+ * Утилита для работы с матрицами
+ */
 public class MatrixUtils {
 
     private MatrixUtils() {
@@ -33,5 +38,3 @@ public class MatrixUtils {
         mat.idt().translate(dst.pos.x, dst.pos.y).scale(scaleX, scaleY).translate(-src.pos.x, -src.pos.y);
     }
 }
-
-
